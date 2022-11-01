@@ -1,39 +1,60 @@
-const Product = require('../models/product');
+const Product = require("../models/product");
 
 exports.newProduct = async (req, res, next) => {
-    const product = await Product.create(req.body);
-    
-    res.status(201).json({
-        success: true,
-        product
-    })
-}
+  const product = await Product.create(req.body);
 
-exports.getProducts = async (req,res,next) => {
+  res.status(201).json({
+    success: true,
+    product,
+  });
+};
 
-    const products = await Product.find();
-        
-    res.status(200).json({
+exports.getProducts = async (req, res, next) => {
+  const products = await Product.find();
+
+  res.status(200).json({
     success: true,
     count: products.length,
-    products
-    })
+    products,
+  });
+};
 
-}
+exports.getSingleProduct = async (req, res, next) => {
+  const product = await Product.findById(req.params.id);
 
-exports.getSingleProduct = async (req,res,next) => {
+  if (!product) {
+    return res.status(404).json({
+      success: false,
+      message: "Product not found",
+    });
+  }
 
-    const product = await Product.findById(req.params.id);
+  res.status(200).json({
+    success: true,
+    product,
+  });
+};
 
-    if(!product) {
-        return res.status(404).json({
-            success: false,
-            message: 'Product not found'
-        })
-    }
+//Update Product
+exports.updateProduct = async (req, res, next) => {
+  const product = await Product.findById(req.params.id);
 
-    res.status(200).json({
-        success: true,
-        product
-    })
-}
+  if (!product) {
+    return res.status(404).json({
+      success: false,
+      message: "Product not found",
+    });
+  }
+
+  product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  res.status(200).json({
+    success: true,
+    product,
+  });
+};
+
+
