@@ -39,20 +39,22 @@ const productSchema = new mongoose.Schema({
         enum: {
             values: [
                 'Electronics',
-                'Camera',
+                'Cameras',
                 'Laptops',
-                'Accesories',
+                'Accessories',
                 'Headphones',
                 'Food',
                 'Books',
-                'Clothes/shoes',
-                'Beauty/Healt',
+                'Clothes/Shoes',
+                'Beauty/Health',
                 'Sports',
                 'Outdoor',
                 'Home'
             ],
             message: 'Please select correct category for product'
-        },
+        }
+    },
+        
         seller: {
             type: String,
             required: [true, 'Please enter product seller']
@@ -87,7 +89,7 @@ const productSchema = new mongoose.Schema({
             type: Date,
             default: Date.now
         }
-    }
+    
 })
 
 module.exports = mongoose.model('Product', productSchema);
