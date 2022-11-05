@@ -68,7 +68,7 @@ exports.deleteProduct = async (req, res, next) => {
     });
   }
 
-  await product.deleteOnev ();
+  await product.deleteOne();
 
   res.status(200).json({
     success: true,
