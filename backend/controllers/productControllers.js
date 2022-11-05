@@ -37,7 +37,7 @@ exports.getSingleProduct = async (req, res, next) => {
 
 //Update Product
 exports.updateProduct = async (req, res, next) => {
-  const product = await Product.findById(req.params.id);
+  let product = await Product.findById(req.params.id);
 
   if (!product) {
     return res.status(404).json({
