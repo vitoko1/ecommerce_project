@@ -1,6 +1,6 @@
 //* Checks if user is authenticated or not
 
-const User = require('../models/user')
+const User = require("../models/user");
 
 const jwt = require("jsonwebtoken");
 const ErrorHandler = require("../utils/errorHandler");
@@ -18,3 +18,18 @@ exports.isAuthentiatedUser = catchAsyncErrors(async (req, res, next) => {
 
   next();
 });
+
+//* Handling user roles
+exports.authorizeRoles = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.roles)) {
+      return next(
+        new ErrorHandler(
+          `Role (${req.user.role}) is not allowed to accedd this resourse`,
+          403
+        )
+      );
+    }
+    next();
+  };
+};
