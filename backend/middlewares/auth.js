@@ -7,6 +7,7 @@ const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncErrors = require("./catchAsyncErrors");
 
 exports.isAuthentiatedUser = catchAsyncErrors(async (req, res, next) => {
+ 
   const { token } = req.cookies;
 
   if (!token) {
@@ -15,14 +16,14 @@ exports.isAuthentiatedUser = catchAsyncErrors(async (req, res, next) => {
 
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
   req.user = await User.findById(decoded.id);
-
+  console.log("INSIDE AUTHETICATED ")
   next();
 });
 
 //* Handling user roles
 exports.authorizeRoles = (...roles) => {
   return (req, res, next) => {
-    if (!roles.includes(req.user.roles)) {
+    if (!roles.includes(req.user.role)) {
       return next(
         new ErrorHandler(
           `Role (${req.user.role}) is not allowed to accedd this resourse`,

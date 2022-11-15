@@ -11,6 +11,7 @@ const user = require("../models/user");
 
 //Register a user
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
+  console.log('ALOJAMIENTO')
   const { name, email, password } = req.body;
 
   const user = await User.create({
