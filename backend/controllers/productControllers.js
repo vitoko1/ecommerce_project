@@ -3,6 +3,7 @@ const ErrorHabndler = require("../utils/errorHandler");
 const catchAsyncError = require("../middlewares/catchAsyncErrors");
 const APIFeatures = require("../utils/apiFeatures");
 const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
+const ErrorHandler = require("../utils/errorHandler");
 
 exports.newProduct = catchAsyncError(async (req, res, next) => {
   req.body.user = req.user.id;
@@ -16,8 +17,10 @@ exports.newProduct = catchAsyncError(async (req, res, next) => {
 });
 
 exports.getProducts = catchAsyncError(async (req, res, next) => {
-  const resultsPerPage = 4;
-  const productCount = await Product.countDocuments();
+  console.log("inside getProducts");
+
+  const resultsPerPage = 8;
+  const productsCount = await Product.countDocuments();
 
   const apiFeatures = new APIFeatures(Product.find(), req.query)
     .search()
@@ -25,19 +28,23 @@ exports.getProducts = catchAsyncError(async (req, res, next) => {
     .pagination(resultsPerPage);
 
   const products = await apiFeatures.query;
+  
+    res.status(200).json({
+      success: true,
+      count: products.length,
+      productsCount,
+      products,
+    });
 
-  res.status(200).json({
-    success: true,
-    count: products.length,
-    productCount,
-    products,
-  });
-});
+
+})
 
 exports.getSingleProduct = catchAsyncError(async (req, res, next) => {
+  console.log("inside getSingleProduct"+req.params.id);
   const product = await Product.findById(req.params.id);
-
   if (!product) {
+
+    console.log("inside false");
     return next(new ErrorHabndler("Product not found", 404));
   }
 
