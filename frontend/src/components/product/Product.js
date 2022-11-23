@@ -1,12 +1,12 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-const Product = ({product}) => {
+const Product = ({product, col}) => {
 
 console.log("Inside PRODUCT");
 
   return (
   
-          <div  className="col-sm-12 col-md-6 col-lg-3 my-3">
+          <div  className={`col-sm-12 col-md-6 col-lg-${col} my-3`}>
                 <div className="card p-3 rounded">
                   <img
                     className="card-img-top mx-auto"
