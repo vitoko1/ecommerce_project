@@ -32,11 +32,11 @@ class APIFeatures {
 
     }
 
-    pagination(resPerPage) {
+    pagination(resultsPerPage) {
         const currentPage = Number(this.queryString.page) || 1;
-        const skip = resPerPage * (currentPage - 1);
+        const skip = resultsPerPage * (currentPage - 1);
 
-        this.query = this.query.limit(resPerPage).skip(skip);
+        this.query = this.query.limit(resultsPerPage).skip(skip);
         return this;
     }
 }
