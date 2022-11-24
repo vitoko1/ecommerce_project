@@ -6,10 +6,16 @@ const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
 const { send } = require("process");
 const user = require("../models/user");
+const cloudinary = require("cloudinary");
 
-//Register a user
+//*Register a user
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
-  console.log("ALOJAMIENTO");
+  const result = await cloudinary.v2.uploader.upload(re.body.avatar, {
+    folder: "avatars",
+    width: 15,
+    crop: "scale",
+  });
+
   const { name, email, password } = req.body;
 
   const user = await User.create({
@@ -17,8 +23,8 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     email,
     password,
     avatar: {
-      public_id: "products/dsvbpny402gelwugv2le",
-      url: "https://res.cloudinary.com/diz5eh6wd/image/upload/v1666590806/samples/animals/three-dogs.jpg",
+      public_id: result.public_id,
+      url: result.secure_url,
     },
   });
 
