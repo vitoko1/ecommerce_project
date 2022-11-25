@@ -41,7 +41,7 @@ export const login = (email, password) => async (dispatch) => {
 //* Register user
 export const register = (userData) => async (dispatch) => {
   try {
-
+console.log("Inside Register");
       dispatch({ type: REGISTER_USER_REQUEST })
 
       const config = {
@@ -51,13 +51,14 @@ export const register = (userData) => async (dispatch) => {
       }
 
       const { data } = await axios.post('/api/v1/register', userData, config)
-
+      console.log("Inside Register2"+data);
       dispatch({
           type: REGISTER_USER_SUCCESS,
           payload: data.user
       })
 
   } catch (error) {
+    console.log(error.response);
       dispatch({
           type: REGISTER_USER_FAIL,
           payload: error.response.data.message
