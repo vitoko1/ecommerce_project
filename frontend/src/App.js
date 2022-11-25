@@ -10,6 +10,7 @@ import { loadUser } from "./actions/userActions";
 import store from "./store";
 import { useEffect } from "react";
 import Profile from "./components/user/Profile";
+import ProtectedRoute from "./components/route/ProtectedRoute";
 function App() {
   useEffect(() => {
     store.dispatch(loadUser());
@@ -26,7 +27,14 @@ function App() {
             <Route path="/search/:keyword" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/me" element={<Profile />} />
+            <Route
+              path="/me"
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            />
             {/* <Route path="/search/:keyword" component={Home} /> */}
 
             {/* <Route path="/product/:id" component={ProductDetails} exact /> */}
