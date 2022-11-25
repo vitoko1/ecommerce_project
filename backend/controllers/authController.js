@@ -10,12 +10,12 @@ const cloudinary = require("cloudinary");
 
 //*Register a user
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
-  const result = await cloudinary.v2.uploader.upload(re.body.avatar, {
+  const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
     folder: "avatars",
     width: 15,
     crop: "scale",
   });
-
+console.log("In AuthController");
   const { name, email, password } = req.body;
 
   const user = await User.create({
