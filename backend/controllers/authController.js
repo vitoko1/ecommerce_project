@@ -153,7 +153,10 @@ exports.getUserProfile = catchAsyncErrors(async (req, res, next) => {
 // Update/Change password
 
 exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
-  const user = await (await User.findById(req.user.id)).isSelected("+password");
+  //const user =  (await User.findById(req.user.id)).isSelected("+password");
+  const user = await User.findOne(User.findById(req.user.id)).select('+password')
+  console.log("USER ;"+user);
+  console.log("USER2 ;"+req.user.id);
 
   const isMatched = await user.comparePassword(req.body.oldPassword);
   if (!isMatched) {
@@ -161,6 +164,7 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
   }
   user.password = req.body.password;
   await user.save();
+
 
   sendToken(user, 200, res);
 });

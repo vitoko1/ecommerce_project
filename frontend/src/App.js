@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import Profile from "./components/user/Profile";
 import ProtectedRoute from "./components/route/ProtectedRoute";
 import UpdateProfile from "./components/user/UpdateProfile";
+import UpdatePassword from "./components/user/UpdatePassword";
 function App() {
   useEffect(() => {
     store.dispatch(loadUser());
@@ -44,6 +45,15 @@ function App() {
                 </ProtectedRoute>
               }
             />
+        <Route
+              path="/password/update"
+              element={
+                <ProtectedRoute>
+                  <UpdatePassword />
+                </ProtectedRoute>
+              }
+            />
+
             {/* <Route path="/search/:keyword" component={Home} /> */}
 
             {/* <Route path="/product/:id" component={ProductDetails} exact /> */}
