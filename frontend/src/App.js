@@ -5,18 +5,16 @@ import Footer from "./components/layout/Footer";
 import Home from "./components/Home";
 import ProductDetails from "./components/product/ProductDetails";
 import Login from "./components/user/Login";
-import Register from "./components/user/Register"
-import {loadUser} from './actions/userActions'
-import store from './store'
-import {useEffect} from  'react'
+import Register from "./components/user/Register";
+import { loadUser } from "./actions/userActions";
+import store from "./store";
+import { useEffect } from "react";
+import Profile from "./components/user/Profile";
+import ProtectedRoute from "./components/route/ProtectedRoute";
 function App() {
-
-
-useEffect(() =>{
-
-store.dispatch(loadUser())
-
-}, [])
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, []);
 
   return (
     <Router>
@@ -29,6 +27,14 @@ store.dispatch(loadUser())
             <Route path="/search/:keyword" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route
+              path="/me"
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            />
             {/* <Route path="/search/:keyword" component={Home} /> */}
 
             {/* <Route path="/product/:id" component={ProductDetails} exact /> */}
