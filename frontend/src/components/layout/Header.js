@@ -11,7 +11,7 @@ import { logout } from "../../actions/userActions";
 const Header = () => {
   const alert = useAlert();
   const dispatch = useDispatch();
-
+  const { cartItems } = useSelector(state => state.cart)
   const { user, loading } = useSelector((state) => state.auth);
 
   const logoutHandler = () => {
@@ -38,15 +38,13 @@ const Header = () => {
           <Search />
         </div>
 
+
         <div className="col-12 col-md-3 mt-4 mt-md-0 text-center">
-          <Link to="/cart" style={{ textDecoration: "none" }}>
-            <span id="cart" className="ml-3">
-              Cart
-            </span>
-            <span className="ml-1" id="cart_count">
-              2
-            </span>
-          </Link>
+                    <Link to="/cart" style={{ textDecoration: 'none' }} >
+                        <span id="cart" className="ml-3">Cart</span>
+                        <span className="ml-1" id="cart_count">{cartItems.length}</span>
+                    </Link>
+
           {user ? (
             <div className="ml-4 drpdown d-inline">
               <Link
