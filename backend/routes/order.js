@@ -10,20 +10,20 @@ const {
   deleteOrder,
 } = require("../controllers/orderController");
 
-const { isAuthentiatedUser, authorizeRoles } = require("../middlewares/auth");
+const { isAuthenticatedUser, authorizeRoles } = require("../middlewares/auth");
 
-router.route("/order/new").post(isAuthentiatedUser, newOrder);
+router.route("/order/new").post(isAuthenticatedUser, newOrder);
 
-router.route("/order/:id").get(isAuthentiatedUser, getSingleOrder);
-router.route("/orders/me").get(isAuthentiatedUser, myOrders);
+router.route("/order/:id").get(isAuthenticatedUser, getSingleOrder);
+router.route("/orders/me").get(isAuthenticatedUser, myOrders);
 
 router
   .route("/admin/orders/")
-  .get(isAuthentiatedUser, authorizeRoles("admin"), allOrders);
+  .get(isAuthenticatedUser, authorizeRoles("admin"), allOrders);
 
 router
   .route("/admin/order/:id")
-  .put(isAuthentiatedUser, authorizeRoles("admin"), updateOrder)
-  .delete(isAuthentiatedUser, authorizeRoles("admin"), deleteOrder);
+  .put(isAuthenticatedUser, authorizeRoles("admin"), updateOrder)
+  .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteOrder);
 
 module.exports = router;

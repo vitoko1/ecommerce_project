@@ -11,7 +11,7 @@ console.log("Inside PRODUCT");
                   <img
                     className="card-img-top mx-auto"
                     alt="product-img"
-                    src="https://cdn.pixabay.com/photo/2015/07/20/19/50/usb-853230__340.png"
+                    src={product.images[0].url}
                   />
                   <div className="card-body d-flex flex-column">
                     <h5 className="card-title">

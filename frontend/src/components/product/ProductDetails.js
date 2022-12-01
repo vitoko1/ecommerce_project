@@ -70,11 +70,7 @@ const addToCart = () => {
                 {product.images &&
                   product.images.map((image) => (
                     <Carousel.Item key={image.public_id}>
-                      <img
-                        className="d-block w-100"
-                        src="https://cdn.pixabay.com/photo/2015/07/20/19/50/usb-853230__340.png"
-                        alt={product.title}
-                      />
+                      <img className="d-block w-100" src={image.url} alt={product.title} />
                     </Carousel.Item>
                   ))}
               </Carousel>
