@@ -22,6 +22,8 @@ import ConfirmOrder from "./components/cart/ConfirmOrder";
 import axios from "axios";
 import Payment from "./components/cart/Payment";
 import OrderSuccess from "./components/cart/OrderSuccess";
+import ListOrders from "./components/order/ListOrders";
+import OrderDetails from "./components/order/OrderDetails";
 
 
 import { Elements } from '@stripe/react-stripe-js'
@@ -114,6 +116,22 @@ function App() {
               element={
                 <ProtectedRoute>
                   <UpdatePassword />
+                </ProtectedRoute>
+              }
+            />
+             <Route
+              path="/orders/me"
+              element={
+                <ProtectedRoute>
+                  <ListOrders />
+                </ProtectedRoute>
+              }
+            />
+             <Route
+              path="/orders/:id"
+              element={
+                <ProtectedRoute>
+                  <OrderDetails />
                 </ProtectedRoute>
               }
             />

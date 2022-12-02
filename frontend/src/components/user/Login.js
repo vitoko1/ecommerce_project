@@ -17,14 +17,14 @@ const Login = ({ history }) => {
   const dispatch = useDispatch();
   const location= useLocation();
 
-  const redirect = location.search ? location.search.split('=')[1] : '/'
+  const redirect = location.search ? location.search.split('=')[1] : ''
 
   const navigate = useNavigate();
 
   const { isAuthenticated, error, loading } = useSelector(
     (state) => state.auth
   );
-
+console.log("Redirect "+redirect)
   useEffect(() => {
     if (isAuthenticated) {
       navigate(`/${redirect}`);
