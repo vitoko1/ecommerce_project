@@ -6,6 +6,9 @@ import {
   ADMIN_PRODUCTS_REQUEST,
   ADMIN_PRODUCTS_SUCCESS,
   ADMIN_PRODUCTS_FAIL,
+  NEW_PRODUCT_REQUEST,
+  NEW_PRODUCT_SUCCESS,
+  NEW_PRODUCT_FAIL,
   CLEAR_ERRORS,
   PRODUCT_DETAILS_FAIL,
   PRODUCT_DETAILS_REQUEST as ADMIN_PRODUCT_REQUEST,
@@ -44,6 +47,35 @@ export const getProducts =
       });
     }
   };
+
+
+  export const newProduct = (productData) => async (dispatch) => {
+    try {
+
+        dispatch({ type: NEW_PRODUCT_REQUEST })
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        const { data } = await axios.post(`/api/v1/admin/product/new`, productData, config)
+
+        dispatch({
+            type: NEW_PRODUCT_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: NEW_PRODUCT_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+
 
 export const getProductDetails = (id) => async (dispatch) => {
   try {
