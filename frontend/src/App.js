@@ -27,9 +27,11 @@ import OrderDetails from "./components/order/OrderDetails";
 
 //* Admin Imports
 import Dashboard from "./components/admin/Dashboard";
+import ProductsList from "./components/admin/ProductsList";
 
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState("");
 
@@ -133,12 +135,9 @@ function App() {
             />
             <Route path="/password/forgot" element={<ForgotPassword />} />
             <Route path="/password/reset/:token" element={<NewPassword />} />
-
-            {/* <Route path="/search/:keyword" component={Home} /> */}
-
-            {/* <Route path="/product/:id" component={ProductDetails} exact /> */}
           </Routes>
         </div>
+
         <Routes>
           <Route
             path="/dashboard"
@@ -146,6 +145,15 @@ function App() {
             element={
               <ProtectedRoute>
                 <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/products"
+            isAdmin={true}
+            element={
+              <ProtectedRoute>
+                <ProductsList />
               </ProtectedRoute>
             }
           />

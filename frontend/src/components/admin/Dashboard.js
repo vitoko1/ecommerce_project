@@ -2,10 +2,27 @@ import React, { Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import MetaData from "../layout/MetaData";
-import Loader from "../layout/Loader";
+// import Loader from "../layout/Loader";
 import Sidebar from "./Sidebar";
 
+import { useDispatch, useSelector } from "react-redux";
+import { getAdminProducts } from "../../actions/productActions";
+
 const Dashboard = () => {
+  const dispatch = useDispatch();
+
+  const { products } = useSelector((state) => state.products);
+
+  let outOfStock = 0;
+  products.forEach((product) => {
+    if (product.stock === 0) {
+      outOfStock += 1;
+    }
+  });
+
+  useEffect(() => {
+    dispatch(getAdminProducts());
+  }, [dispatch]);
 
   return (
     <Fragment>
@@ -16,7 +33,6 @@ const Dashboard = () => {
 
         <div className="col-12 col-md-10">
           <h1 className="my-4">Dashboard</h1>
-          <Loader />
           <Fragment>
             <MetaData title={"Admin Dashboard"} />
             <div className="row pr-4">
@@ -24,8 +40,9 @@ const Dashboard = () => {
                 <div className="card text-white bg-primary o-hidden h-100">
                   <div className="card-body">
                     <div className="text-center card-font-size">
-                      Total Amount<br/>
-                      <b>$4567</b>                
+                      Total Amount
+                      <br />
+                      <b>$4567</b>
                     </div>
                   </div>
                 </div>
@@ -36,9 +53,9 @@ const Dashboard = () => {
                 <div className="card text-white bg-success o-hidden h-100">
                   <div className="card-body">
                     <div className="text-center card-font-size">
-                      Products<br/>
-                      <b>56</b>
-                    
+                      Products
+                      <br />
+                      <b>{products && products.length}</b>
                     </div>
                   </div>
                   <Link
@@ -57,9 +74,9 @@ const Dashboard = () => {
                 <div className="card text-white bg-danger o-hidden h-100">
                   <div className="card-body">
                     <div className="text-center card-font-size">
-                      Orders<br/>
+                      Orders
+                      <br />
                       <b>125</b>
-       
                     </div>
                   </div>
                   <Link
@@ -78,9 +95,9 @@ const Dashboard = () => {
                 <div className="card text-white bg-info o-hidden h-100">
                   <div className="card-body">
                     <div className="text-center card-font-size">
-                      Users<br/>
+                      Users
+                      <br />
                       <b>45</b>
-         
                     </div>
                   </div>
                   <Link
@@ -99,8 +116,9 @@ const Dashboard = () => {
                 <div className="card text-white bg-warning o-hidden h-100">
                   <div className="card-body">
                     <div className="text-center card-font-size">
-                      Out of Stock<br/>
-                      <b>4</b>
+                      Out of Stock
+                      <br />
+                      <b>{outOfStock}</b>
                     </div>
                   </div>
                 </div>

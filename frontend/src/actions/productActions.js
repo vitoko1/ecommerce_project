@@ -3,9 +3,12 @@ import {
   ALL_PRODUCTS_REQUEST,
   ALL_PRODUCTS_SUCCESS,
   ALL_PRODUCTS_FAIL,
+  ADMIN_PRODUCTS_REQUEST,
+  ADMIN_PRODUCTS_SUCCESS,
+  ADMIN_PRODUCTS_FAIL,
   CLEAR_ERRORS,
   PRODUCT_DETAILS_FAIL,
-  PRODUCT_DETAILS_REQUEST,
+  PRODUCT_DETAILS_REQUEST as ADMIN_PRODUCT_REQUEST,
   PRODUCT_DETAILS_SUCCESS,
   NEW_REVIEW_REQUEST,
   NEW_REVIEW_SUCCESS,
@@ -45,7 +48,7 @@ export const getProducts =
 export const getProductDetails = (id) => async (dispatch) => {
   try {
     console.log("getProductDetails");
-    dispatch({ type: PRODUCT_DETAILS_REQUEST });
+    dispatch({ type: ADMIN_PRODUCT_REQUEST });
 
     const { data } = await axios.get(`/api/v1/product/${id}`);
     console.log("getProductDetails DATA ");
@@ -86,6 +89,29 @@ export const newReview = (reviewData) => async (dispatch) => {
       })
   }
 };
+
+
+export const getAdminProducts = () => async (dispatch) => {
+  try {
+    console.log("getProductDetails");
+    dispatch({ type: ADMIN_PRODUCTS_REQUEST });
+
+    const { data } = await axios.get(`/api/v1/admin/products`);
+    console.log("getProductDetails DATA ");
+    dispatch({
+      type: ADMIN_PRODUCTS_SUCCESS,
+      payload: data.products,
+    });
+  } catch (error) {
+    dispatch({
+      type: ADMIN_PRODUCTS_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+
+
 
 // clear errors
 export const clearErrors = () => async (dispatch) => {
