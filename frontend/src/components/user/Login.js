@@ -50,9 +50,9 @@ console.log("Redirect "+redirect)
         <Fragment>
           <MetaData title={"Login"} />
 
-          <div className="row wrapper">
-            <div className="col-10 col-lg-5">
-              <form className="shadow-lg" onSubmit={submitHandler}>
+          <div className="container row wrapper align-items-center">
+            <div className="col-7 col-lg-5">
+              <form className="shadow-lg justify-content-md-center" onSubmit={submitHandler}>
                 <h1 className="mb-3">Login</h1>
                 <div className="form-group">
                   <label htmlFor="email_field">Email</label>
@@ -76,21 +76,23 @@ console.log("Redirect "+redirect)
                   />
                 </div>
 
-                <Link to="/password/forgot" className="float-right mb-4">
+                <div className="row align-items-center justify-content-md-center">
+                <Link to="/password/forgot" className="col-sm-3 my-1 px-1 mx-2 float-right">
                   Forgot Password?
                 </Link>
 
                 <button
                   id="login_button"
                   type="submit"
-                  className="btn btn-block py-3"
+                  className="col-sm-3 my-1 btn btn-primary px-1 mx-2"
                 >
                   LOGIN
                 </button>
 
-                <Link to="/register" className="float-right mt-3">
+                <Link to="/register" className="col-sm-3 my-1 px-1 mx-2 float-right">
                   New User?
                 </Link>
+                </div>
               </form>
             </div>
           </div>

@@ -56,8 +56,8 @@ const Cart = ({ history }) => {
 
                                     <div className="cart-item" key={item.product}>
                                         <div className="row">
-                                            <div className="col-4 col-lg-3">
-                                                <img src={item.image} alt="Laptop" height="90" width="115" />
+                                            <div className="col-4 col-lg-3 img-fluid px-0">
+                                                <img src={item.image} alt="" height="90" width="115" />
                                             </div>
 
                                             <div className="col-5 col-lg-3">
@@ -79,7 +79,7 @@ const Cart = ({ history }) => {
                                                 </div>
                                             </div>
 
-                                            <div className="col-4 col-lg-1 mt-4 mt-lg-0">
+                                            <div className="col-4 col-lg-1 mt-4 mt-lg-0 py-1">
                                                 <i id="delete_cart_item" className="fa fa-trash btn btn-danger" onClick={() => removeCartItemHandler(item.product)} ></i>
                                             </div>
 
