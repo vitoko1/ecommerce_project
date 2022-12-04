@@ -19,12 +19,13 @@ router.route("/admin/products").get(getAdminProducts);
 
 router.route("/product/:id").get(getSingleProduct);
 
+console.log("Route produc new...")
 router
-  .route("/admin/products/new")
+  .route("/admin/product/new")
   .post(isAuthenticatedUser, authorizeRoles("admin"), newProduct);
 
 router
-  .route("/admin/products/:id")
+  .route("/admin/product/:id")
   .put(isAuthenticatedUser, authorizeRoles("admin"), updateProduct)
   .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteProduct);
 

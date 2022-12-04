@@ -7,6 +7,7 @@ import ProductDetails from "./components/product/ProductDetails";
 import Login from "./components/user/Login";
 import Register from "./components/user/Register";
 import { loadUser } from "./actions/userActions";
+import { useSelector } from "react-redux";
 import store from "./store";
 import { useEffect, useState } from "react";
 import Profile from "./components/user/Profile";
@@ -28,9 +29,11 @@ import OrderDetails from "./components/order/OrderDetails";
 //* Admin Imports
 import Dashboard from "./components/admin/Dashboard";
 import ProductsList from "./components/admin/ProductsList";
+import NewProduct from "./components/admin/NewProduct";
 
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { userReducer } from "./reducers/userReducers";
 
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState("");
@@ -46,6 +49,8 @@ function App() {
 
     getStripApiKey();
   }, []);
+
+  const { user, loading } = useSelector((state) => state.auth);
 
   return (
     <Router>
@@ -137,7 +142,7 @@ function App() {
             <Route path="/password/reset/:token" element={<NewPassword />} />
           </Routes>
         </div>
-
+        {/* //* Routes Admin */}
         <Routes>
           <Route
             path="/dashboard"
@@ -157,9 +162,17 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/admin/product"
+            isAdmin={true}
+            element={
+              <ProtectedRoute>
+                <NewProduct />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
-
-        <Footer />
+        {!loading && userReducer.role !== "admin" && <Footer />}
       </div>
     </Router>
   );

@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MDBDataTable } from "mdbreact";
 
 import MetaData from "../layout/MetaData";
@@ -7,23 +7,43 @@ import Loader from "../layout/Loader";
 
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
-import { getAdminProducts, clearErrors } from "../../actions/productActions";
+import {
+  getAdminProducts,
+  clearErrors,
+  deleteProduct,
+} from "../../actions/productActions";
 import Sidebar from "./Sidebar";
+import { DELETE_PRODUCT_RESET } from "../../constants/productConstants";
 
 const ProductsList = (history) => {
   const alert = useAlert();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { loading, error, products } = useSelector((state) => state.products);
+  const { error: deleteError, isDeleted } = useSelector(state => state.product);
 
   useEffect(() => {
     dispatch(getAdminProducts());
+
+    console.log("deleteError (if)...")
+    if (deleteError) {
+      alert.error(deleteError);
+      dispatch(clearErrors())
+  }
+
+  console.log("isDeleted (if)...")
+  if (isDeleted) {
+      alert.success('Product deleted successfully');
+      navigate('/admin/products');
+      dispatch({ type: DELETE_PRODUCT_RESET })
+  }
 
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
-  }, [dispatch, alert, error]);
+  }, [dispatch, alert, error, deleteError, isDeleted, history]);
 
   const setProducts = () => {
     const data = {
@@ -70,7 +90,10 @@ const ProductsList = (history) => {
             >
               <i className="fa fa-pencil"></i>
             </Link>
-            <button className="btn btn-danger py-1 px-2 ml-2">
+            <button
+              className="btn btn-danger py-1 px-2 ml-2"
+              onClick={() => deleteProductHandler(product._id)}
+            >
               <i className="fa fa-trash"></i>
             </button>
           </Fragment>
@@ -79,6 +102,10 @@ const ProductsList = (history) => {
     });
 
     return data;
+  };
+
+  const deleteProductHandler = (id) => {
+    dispatch(deleteProduct(id));
   };
   return (
     <Fragment>
