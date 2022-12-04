@@ -71,7 +71,7 @@ const Header = () => {
                 className="dropdown-menu btn-sm"
                 aria-labelledby="dropDownMenuButton"
               >
-                {user && user.role !== "admin" && (
+                {user && user.role === "admin" && (
                  <Link className="dropdown-item" to="/dashboard">
                  Dashboard
                </Link>
