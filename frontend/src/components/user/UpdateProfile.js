@@ -111,7 +111,7 @@ const UpdateProfile = ({ history }) => {
                                     <figure className='avatar mr-3 item-rtl'>
                                         <img
                                             src={avatarPreview}
-                                            className='rounded-circle'
+                                            className='rounded-circle img-fluid col-md-4 px-0'
                                             alt='Avatar Preview'
                                         />
                                     </figure>
@@ -120,12 +120,12 @@ const UpdateProfile = ({ history }) => {
                                     <input
                                         type='file'
                                         name='avatar'
-                                        className='custom-file-input'
+                                        className='custom-file-input mx-2'
                                         id='customFile'
                                         accept='image/*'
                                         onChange={onChange}
                                     />
-                                    <label className='custom-file-label' htmlFor='customFile'>
+                                    <label className='custom-file-label mx-2' htmlFor='customFile'>
                                         Choose Avatar
                                 </label>
                                 </div>

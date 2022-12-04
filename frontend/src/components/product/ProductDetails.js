@@ -171,7 +171,7 @@ const reviewHandler = () => {
               <button
                 type="button"
                 id="cart_btn"
-                className="btn btn-primary d-inline ml-4"
+                className="btn btn-primary d-inline mx-2 ml-4"
                 disabled={product.stock === 0}
                 onClick={addToCart}
               >

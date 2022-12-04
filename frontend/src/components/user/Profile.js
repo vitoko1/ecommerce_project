@@ -35,7 +35,7 @@ const Profile = () => {
               </Link>
             </div>
 
-            <div className="col-12 col-md-5">
+            <div className="col-12 col-md-5 align-items-center">
               <h4>Full Name</h4>
               <p>{user.name}</p>
 
@@ -46,14 +46,14 @@ const Profile = () => {
               <p>{String(user.createdAt).substring(0, 10)}</p>
 
               {user.role !== "admin" && (
-                <Link to="/orders/me" className="btn btn-danger btn-block mt-5">
+                <Link to="/orders/me" className="btn btn-danger btn-block mx-2 mt-5">
                   My Orders
                 </Link>
               )}
 
               <Link
                 to="/password/update"
-                className="btn btn-primary btn-block mt-3"
+                className="btn btn-primary btn-block mx-2 mt-5"
               >
                 Change Password
               </Link>
