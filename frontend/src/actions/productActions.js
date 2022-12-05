@@ -25,6 +25,9 @@ import {
   NEW_REVIEW_SUCCESS,
   NEW_REVIEW_RESET,
   NEW_REVIEW_FAIL,
+  GET_REVIEWS_REQUEST,
+  GET_REVIEWS_SUCCESS,
+  GET_REVIEWS_FAIL,
 } from "../constants/productConstants";
 
 export const getProducts =
@@ -192,6 +195,29 @@ export const getAdminProducts = () => async (dispatch) => {
     });
   }
 };
+
+//* Get product reviews 
+export const getProductReviews = (id) => async (dispatch) => {
+  try {
+
+      dispatch({ type: GET_REVIEWS_REQUEST })
+
+      const { data } = await axios.get(`/api/v1/reviews?id=${id}`)
+
+      dispatch({
+          type: GET_REVIEWS_SUCCESS,
+          payload: data.reviews
+      })
+
+  } catch (error) {
+
+      dispatch({
+          type: GET_REVIEWS_FAIL,
+          payload: error.response.data.message
+      })
+  }
+}
+
 
 // clear errors
 export const clearErrors = () => async (dispatch) => {
