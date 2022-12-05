@@ -12,19 +12,19 @@ import {
   deleteReview,
   clearErrors,
 } from "../../actions/productActions";
-// import { DELETE_REVIEW_RESET } from "../../constants/productConstants";
+import { DELETE_REVIEW_RESET } from "../../constants/productConstants";
 
 const ProductReviews = () => {
-    console.log("Product Reviews...")
+  console.log("Product Reviews...");
   const [productId, setProductId] = useState("");
 
   const alert = useAlert();
   const dispatch = useDispatch();
 
-  const { loading, error, reviews } = useSelector((state) => state.productReviews);
-//   const { isDeleted, error: deleteError } = useSelector(
-//     (state) => state.review
-//   );
+  const { error, reviews } = useSelector((state) => state.productReviews);
+  const { isDeleted, error: deleteError } = useSelector(
+    (state) => state.review
+  );
 
   useEffect(() => {
     if (error) {
@@ -32,24 +32,24 @@ const ProductReviews = () => {
       dispatch(clearErrors());
     }
 
-    // if (deleteError) {
-    //   alert.error(deleteError);
-    //   dispatch(clearErrors());
-    // }
+    if (deleteError) {
+      alert.error(deleteError);
+      dispatch(clearErrors());
+    }
 
     if (productId !== "") {
       dispatch(getProductReviews(productId));
     }
 
-    // if (isDeleted) {
-    //   alert.success("Review deleted successfully");
-    //   dispatch({ type: DELETE_REVIEW_RESET });
-    // }
-  }, [dispatch, alert, error, productId]);
+    if (isDeleted) {
+      alert.success("Review deleted successfully");
+      dispatch({ type: DELETE_REVIEW_RESET });
+    }
+  }, [dispatch, alert, error, productId, isDeleted]);
 
-//   const deleteReviewHandler = (id) => {
-//     dispatch(deleteReview(id, productId));
-//   };
+    const deleteReviewHandler = (id) => {
+      dispatch(deleteReview(id, productId));
+    };
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -97,7 +97,7 @@ const ProductReviews = () => {
         actions: (
           <button
             className="btn btn-danger py-1 px-2 ml-2"
-            // onClick={() => deleteReviewHandler(review._id)}
+            onClick={() => deleteReviewHandler(review._id)}
           >
             <i className="fa fa-trash"></i>
           </button>
