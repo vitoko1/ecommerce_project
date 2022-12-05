@@ -13,11 +13,15 @@ import {
   deleteOrder,
   clearErrors,
 } from "../../actions/orderActions";
-// import { DELETE_ORDER_RESET } from "../../constants/orderConstants";
+ import { DELETE_ORDER_RESET } from "../../constants/orderConstants";
+
+
 
 const OrdersList = () => {
+
   console.log("Orders List...");
-//   const navigate = useNavigate();
+   const navigate = useNavigate();
+   const { isDeleted } = useSelector(state => state.order)
 
   const alert = useAlert();
   const dispatch = useDispatch();
@@ -28,16 +32,18 @@ const OrdersList = () => {
   useEffect(() => {
     dispatch(allOrders());
 
-    // if (isDeleted) {
-    //   alert.success("Order deleted successfully");
-    //   navigate("/admin/orders");
-    //   dispatch({ type: DELETE_ORDER_RESET });
-    // }
-  }, [dispatch, alert, error]);
+     if (isDeleted) {
+       alert.success("Order deleted successfully");
+       navigate("/admin/orders");
+       dispatch({ type: DELETE_ORDER_RESET });
+     }
 
-  //   const deleteOrderHandler = (id) => {
-  //     dispatch(deleteOrder(id));
-  //   };
+
+  }, [dispatch, alert, error,isDeleted]);
+
+     const deleteOrderHandler = (id) => {
+       dispatch(deleteOrder(id));
+     };
 
   const setOrders = () => {
     const data = {
@@ -92,7 +98,7 @@ const OrdersList = () => {
             </Link>
             <button
               className="btn btn-danger py-1 px-2 ml-2"
-              //   onClick={() => deleteOrderHandler(order._id)}
+                 onClick={() => deleteOrderHandler(order._id)}
             >
               <i className="fa fa-trash"></i>
             </button>
