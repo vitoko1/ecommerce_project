@@ -103,7 +103,7 @@ export const allOrders = () => async (dispatch) => {
   }
 };
 
-// update order
+//* update order (Admin)
 export const updateOrder = (id, orderData) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_ORDER_REQUEST });

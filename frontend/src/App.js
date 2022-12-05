@@ -32,6 +32,7 @@ import ProductsList from "./components/admin/ProductsList";
 import NewProduct from "./components/admin/NewProduct";
 import UpdateProduct from "./components/admin/UpdateProduct";
 import OrdersList from "./components/admin/OrderList";
+import ProcessOrder from "./components/admin/ProcessOrder";
 
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
@@ -188,6 +189,15 @@ function App() {
             element={
               <ProtectedRoute>
                 <OrdersList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/order/:id"
+            isAdmin={true}
+            element={
+              <ProtectedRoute>
+                <ProcessOrder />
               </ProtectedRoute>
             }
           />
