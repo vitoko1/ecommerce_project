@@ -39,6 +39,7 @@ import UpdateUser from "./components/admin/UpdateUser";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { userReducer } from "./reducers/userReducers";
+import ProductReviews from "./components/admin/ProductReviews";
 
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState("");
@@ -203,7 +204,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-            <Route
+          <Route
             path="/admin/users"
             isAdmin={true}
             element={
@@ -212,12 +213,21 @@ function App() {
               </ProtectedRoute>
             }
           />
-              <Route
+          <Route
             path="/admin/user/:id"
             isAdmin={true}
             element={
               <ProtectedRoute>
                 <UpdateUser />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/reviews"
+            isAdmin={true}
+            element={
+              <ProtectedRoute>
+                <ProductReviews />
               </ProtectedRoute>
             }
           />
