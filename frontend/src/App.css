@@ -56,9 +56,11 @@ nav {
 
 #login_btn,
 #view_btn {
-  background-color: #292c3a;
+  background-color: #292C3A;
   padding: 0.4rem 1.8rem;
   font-family: calibri;
+  color: whitesmoke;
+  border-color: whitesmoke;
 }
 
 #cart {
