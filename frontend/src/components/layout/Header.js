@@ -27,7 +27,7 @@ const Header = () => {
           <div className="navbar-brand">
             <Link to="/">
               <img
-                src="/images/logo.png"
+                src="/images/logo2.png"
                 alt="logo"
                 className="img-fluid col-md-4 px-0"
               />
